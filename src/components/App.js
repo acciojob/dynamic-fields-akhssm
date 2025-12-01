@@ -14,28 +14,30 @@ const App = () => {
   };
 
   const removeField = (id) => {
-    setFields(fields.filter((item) => item.id !== id));
+    setFields(fields.filter((f) => f.id !== id));
   };
 
   const handleChange = (id, e) => {
     const { name, value } = e.target;
-    setFields(fields.map((item) =>
-      item.id === id ? { ...item, [name]: value } : item
+    setFields(fields.map((f) =>
+      f.id === id ? { ...f, [name]: value } : f
     ));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Form Data:", fields);
+    const cleanedData = fields.map(({ name, age }) => ({ name, age }));
+
+    console.log(cleanedData);
   };
 
   return (
-    <div className="container">
+    <div>
       {/* Do not remove the main div */}
       <form onSubmit={handleSubmit}>
         {fields.map((item) => (
-          <div className="field-row" key={item.id}>
+          <div key={item.id} className="field-row">
             <input
               name="name"
               placeholder="Name"
@@ -52,7 +54,6 @@ const App = () => {
 
             <button
               type="button"
-              className="remove-btn"
               onClick={() => removeField(item.id)}
             >
               Remove
@@ -60,17 +61,15 @@ const App = () => {
           </div>
         ))}
 
-        <button type="button" className="add-btn" onClick={addField}>
+        <button type="button" onClick={addField}>
           Add More..
         </button>
 
-        <button type="submit" className="submit-btn">
+        <button type="submit">
           Submit
         </button>
 
-        <p className="info-text">
-          After clicking submit check console for data
-        </p>
+        <p>After clicking submit check console for data</p>
       </form>
     </div>
   );
