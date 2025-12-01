@@ -26,6 +26,7 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     console.log("Form Data:", fields);
   };
 
@@ -35,7 +36,6 @@ const App = () => {
       <form onSubmit={handleSubmit}>
         {fields.map((item) => (
           <div className="field-row" key={item.id}>
-            
             <input
               name="name"
               placeholder="Name"
@@ -68,7 +68,9 @@ const App = () => {
           Submit
         </button>
 
-        <p className="info-text">After clicking submit check console for data</p>
+        <p className="info-text">
+          After clicking submit check console for data
+        </p>
       </form>
     </div>
   );
